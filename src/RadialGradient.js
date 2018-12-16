@@ -5,6 +5,7 @@ import { normalizeIntervals, getHypotenuse } from './utils';
 
 // const { height: SCREEN_HEIGHT, width: SCREEN_WIDTH } = Dimensions.get('window');
 const { hairlineWidth } = StyleSheet;
+const doubleHairlineWidth = hairlineWidth * 2;
 
 export default class RadialGradient extends React.Component {
   render() {
@@ -25,7 +26,8 @@ export default class RadialGradient extends React.Component {
             overflow: 'hidden'
           }}
         >
-          <View
+          {Ring(diagonal, 'red')}
+          {/* <View
             style={{
               justifyContent: 'center',
               alignItems: 'center',
@@ -33,7 +35,6 @@ export default class RadialGradient extends React.Component {
             }}
           >
             {[...Array(gradientArrayLength)].map((_, i) => {
-              const doubleHairlineWidth = hairlineWidth * 2;
               const size = doubleHairlineWidth * (i + 1);
               return (
                 <Animated.View
@@ -52,13 +53,32 @@ export default class RadialGradient extends React.Component {
                 />
               );
             })}
-          </View>
+          </View> */}
         </View>
         {children}
       </View>
     );
   }
 }
+
+const Ring = (size, backgroundColor) => {
+  return (
+    size > 0 && (
+      <Animated.View
+        style={{
+          backgroundColor: 'red',
+          height: size,
+          width: size,
+          borderRadius: size / 2,
+          justifyContent: 'center',
+          alignItems: 'center'
+        }}
+      >
+        <Ring size={size - doubleHairlineWidth} backgroundColor={backgroundColor} />
+      </Animated.View>
+    )
+  );
+};
 
 RadialGradient.propTypes = {
   height: PropTypes.number.isRequired,
