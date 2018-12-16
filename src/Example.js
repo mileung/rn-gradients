@@ -5,7 +5,7 @@ import RadialGradient from './RadialGradient';
 
 const { height, width } = Dimensions.get('window');
 let colors = ['#ade', '#fde'];
-colors = ['#000', '#fff'];
+// colors = ['#000', '#fff'];
 // colors = ['red', 'green', 'blue'];
 // const intervals = [0.2, 0.8, 1];
 
@@ -14,42 +14,34 @@ export default class Example extends React.Component {
 
   render() {
     const { rotation } = this.state;
+    let Gradient = LinearGradient;
+    Gradient = RadialGradient;
 
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         {this.state.showGradient ? (
-          <>
-            {/* <LinearGradient
-              height={height}
-              width={width}
-              rotation={rotation}
-              colors={colors}
-              // intervals={intervals}
-              style={{ justifyContent: 'center', alignItems: 'center' }}
-            >
-              <Text style={{ fontSize: 42, fontWeight: '900', color: '#fff9' }}>{rotation}°</Text>
-            </LinearGradient> */}
-            <RadialGradient
-              height={height}
-              // height={width}
-              width={width}
-              // rotation={rotation}
-              colors={colors}
-              // intervals={intervals}
-              style={{ justifyContent: 'center', alignItems: 'center' }}
-            >
-              {/* <Text style={{ fontSize: 42, fontWeight: '900', color: '#fff9' }}>{rotation}°</Text> */}
-            </RadialGradient>
-          </>
+          <Gradient
+            height={height}
+            width={width}
+            colors={colors}
+            // intervals={intervals}
+            rotation={rotation}
+            scaleX={1}
+            scaleY={2}
+            style={{ justifyContent: 'center', alignItems: 'center' }}
+          >
+            <Text style={{ fontSize: 42, fontWeight: '900', color: '#fff9' }}>{rotation}°</Text>
+          </Gradient>
         ) : (
-          <Text>Nothing</Text>
+          // This is just here to show how quickly the gradients can be
+          <Text>Hold on...</Text>
         )}
       </View>
     );
   }
 
   componentDidMount() {
-    setTimeout(() => this.setState({ showGradient: true }), 500);
+    setTimeout(() => this.setState({ showGradient: true }), 100);
     // setInterval(() => {
     //   let rotation = this.state.rotation + 45;
     //   if (rotation > 360) {
