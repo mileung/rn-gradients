@@ -1,35 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { View, StyleSheet, Animated, Dimensions } from 'react-native';
-import { normalizeIntervals, degToRad } from './utils';
+import { normalizeIntervals, getHypotenuse } from './utils';
 
+// const { height: SCREEN_HEIGHT, width: SCREEN_WIDTH } = Dimensions.get('window');
 const { hairlineWidth } = StyleSheet;
-const doubleHairlineWidth = hairlineWidth * 2;
-const negativeHairlineWidth = -hairlineWidth;
 
-export default class LinearGradient extends React.Component {
+export default class RadialGradient extends React.Component {
   render() {
-    const { style, height, width, colors, children } = this.props;
-    let { intervals, rotation } = this.props;
+    const { style, height, width, scaleX, scaleY, colors, rotation, children } = this.props;
+    let { intervals } = this.props;
 
-    rotation %= 360; // set rotation greater than 360° to its less than 360° equivalent
-
-    // if (rotation < 0) {
-    //   rotation = 360 + rotation; // set negative rotation to its positive equivalent
-    // }
-
-    let scaleX = 1;
-    let scaleY = 1;
-
-    // const normalizedRotation = rotation % 90;
-    //
-    // if (rotation > 180) {
-    //   rotation %= 180;
-    //   scaleX = -1;
-    //   scaleY = -1;
-    // }
-
-    const gradientArrayLength = Math.ceil(gradientYLength / hairlineWidth);
+    const diagonal = getHypotenuse(height, width);
+    const gradientArrayLength = Math.ceil(diagonal / 2 / hairlineWidth);
     const normalIntervals = normalizeIntervals(intervals, colors, gradientArrayLength);
 
     return (
@@ -42,15 +25,25 @@ export default class LinearGradient extends React.Component {
             overflow: 'hidden'
           }}
         >
-          <View style={{ transform: [{ scaleX }, { scaleY }, { rotate: `${rotation}deg` }] }}>
+          <View
+            style={{
+              justifyContent: 'center',
+              alignItems: 'center',
+              transform: [{ scaleX: 1 }, { scaleY: 1 }, { rotate: `${rotation}deg` }]
+            }}
+          >
             {[...Array(gradientArrayLength)].map((_, i) => {
+              const doubleHairlineWidth = hairlineWidth * 2;
+              const size = doubleHairlineWidth * (i + 1);
               return (
                 <Animated.View
                   key={i}
                   style={{
-                    height: doubleHairlineWidth,
-                    marginTop: negativeHairlineWidth,
-                    width: gradientXLength,
+                    zIndex: -i,
+                    height: size,
+                    width: size,
+                    borderRadius: size / 2,
+                    position: 'absolute',
                     backgroundColor: new Animated.Value(i).interpolate({
                       inputRange: normalIntervals,
                       outputRange: colors
@@ -67,7 +60,7 @@ export default class LinearGradient extends React.Component {
   }
 }
 
-LinearGradient.propTypes = {
+RadialGradient.propTypes = {
   height: PropTypes.number.isRequired,
   width: PropTypes.number.isRequired,
   colors: PropTypes.arrayOf(PropTypes.string).isRequired,
@@ -75,7 +68,7 @@ LinearGradient.propTypes = {
   rotation: PropTypes.number // in degrees - NOT radians.
 };
 
-LinearGradient.defaultProps = {
+RadialGradient.defaultProps = {
   height: 0,
   width: 0,
   rotation: 0
