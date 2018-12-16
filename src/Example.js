@@ -7,10 +7,10 @@ const { height, width } = Dimensions.get('window');
 let colors = ['#ade', '#fde'];
 colors = ['#000', '#fff'];
 // colors = ['red', 'green', 'blue'];
-// const intervals = [0, 0.3, 1];
+// const intervals = [0.2, 0.8, 1];
 
 export default class Example extends React.Component {
-  state = { rotation: 60, showGradient: false };
+  state = { rotation: 0, showGradient: false };
 
   render() {
     const { rotation } = this.state;
@@ -38,7 +38,7 @@ export default class Example extends React.Component {
               // intervals={intervals}
               style={{ justifyContent: 'center', alignItems: 'center' }}
             >
-              <Text style={{ fontSize: 42, fontWeight: '900', color: '#fff9' }}>{rotation}°</Text>
+              {/* <Text style={{ fontSize: 42, fontWeight: '900', color: '#fff9' }}>{rotation}°</Text> */}
             </RadialGradient>
           </>
         ) : (

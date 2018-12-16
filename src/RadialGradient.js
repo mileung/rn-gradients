@@ -5,7 +5,7 @@ import { normalizeIntervals, getHypotenuse } from './utils';
 
 // const { height: SCREEN_HEIGHT, width: SCREEN_WIDTH } = Dimensions.get('window');
 // const { hairlineWidth } = StyleSheet;
-const hairlineWidth = 10;
+const hairlineWidth = 4.8;
 const doubleHairlineWidth = hairlineWidth * 2;
 
 export default class RadialGradient extends React.Component {
@@ -34,7 +34,8 @@ export default class RadialGradient extends React.Component {
               transform: [{ scaleX: 1 }, { scaleY: 1 }, { rotate: `${rotation}deg` }]
             }}
           >
-            {[...Array(gradientArrayLength)].reduce((innerRing, _, i) => {
+            {[...Array(gradientArrayLength)].slice(0, undefined).reduce((innerRing, _, i) => {
+              // I've came to the conclusion that React Native limits the number of children, grandchildren, great grandchildren, etc. a single element can have. Why? Play around with the second argument of the slice method. If you just put in 9, you get a mostly black dot. If you put in 90 or undefined, the first, inner-most rings are gone and all that's left is a gray circle. Also, try setting the size variable to `i === 0 ? 300 : doubleHairlineWidth * (i + 1);`. There will be no black dot in the middle with a size of 300. I don't know what the limit is on how deep an component hierarchy can be, but I feel like it's definitely exists.
               const size = doubleHairlineWidth * (i + 1);
               return (
                 <Animated.View
@@ -42,7 +43,6 @@ export default class RadialGradient extends React.Component {
                     height: size,
                     width: size,
                     borderRadius: size / 2,
-                    position: 'absolute',
                     justifyContent: 'center',
                     alignItems: 'center',
                     backgroundColor: new Animated.Value(i).interpolate({
