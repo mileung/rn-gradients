@@ -18,19 +18,26 @@ export default class LinearGradient extends React.Component {
       rotation = 360 + rotation; // set negative rotation to its positive equivalent
     }
 
+    let normalizedRotation = rotation;
     let scaleX = 1;
     let scaleY = 1;
 
-    const normalizedRotation = rotation % 90;
-
-    if (rotation > 180) {
-      rotation %= 180;
-      scaleX = -1;
-      scaleY = -1;
+    if (rotation >= 90) {
+      if (rotation <= 180) {
+        normalizedRotation = 180 - normalizedRotation;
+        scaleY = -1;
+      } else if (rotation < 270) {
+        normalizedRotation %= 90;
+        scaleX = -1;
+        scaleY = -1;
+      } else if (rotation < 360) {
+        normalizedRotation = 360 - normalizedRotation;
+        scaleX = -1;
+      }
     }
 
-    const sin1 = Math.sin(degToRad(90 - (rotation > 90 ? rotation % 90 : rotation)));
-    const sin2 = Math.sin(degToRad(rotation));
+    const sin1 = Math.sin(degToRad(90 - normalizedRotation));
+    const sin2 = Math.sin(degToRad(normalizedRotation));
     const gradientYLength = height * sin1 + width * sin2;
     const gradientXLength = width * sin1 + height * sin2;
     const gradientArrayLength = Math.ceil(gradientYLength / hairlineWidth);
@@ -38,15 +45,10 @@ export default class LinearGradient extends React.Component {
 
     return (
       <View style={[style, { height, width }]}>
-        <View
-          style={{
-            ...StyleSheet.absoluteFill,
-            justifyContent: 'center',
-            alignItems: 'center',
-            overflow: 'hidden'
-          }}
-        >
-          <View style={{ transform: [{ scaleX }, { scaleY }, { rotate: `${rotation}deg` }] }}>
+        <View style={styles.container}>
+          <View
+            style={{ transform: [{ scaleX }, { scaleY }, { rotate: `${normalizedRotation}deg` }] }}
+          >
             {[...Array(gradientArrayLength)].map((_, i) => {
               return (
                 <Animated.View
@@ -84,3 +86,12 @@ LinearGradient.defaultProps = {
   width: 0,
   rotation: 0
 };
+
+const styles = StyleSheet.create({
+  container: {
+    ...StyleSheet.absoluteFill,
+    justifyContent: 'center',
+    alignItems: 'center',
+    overflow: 'hidden'
+  }
+});

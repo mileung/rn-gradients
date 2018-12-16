@@ -14,7 +14,6 @@ export function normalizeIntervals(intervals, colors, gradientArrayLength) {
   return intervals.map(num => num * (gradientArrayLength - 1));
 }
 
-// const { height: SCREEN_HEIGHT, width: SCREEN_WIDTH } = Dimensions.get('window');
 const DEG_PER_RAD = Math.PI / 180;
 export const degToRad = deg => deg * DEG_PER_RAD;
 

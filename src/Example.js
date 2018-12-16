@@ -5,17 +5,27 @@ import RadialGradient from './RadialGradient';
 
 const { height, width } = Dimensions.get('window');
 let colors = ['#ade', '#fde'];
-// colors = ['#000', '#fff'];
+colors = ['#000', '#fff'];
 // colors = ['red', 'green', 'blue'];
 // const intervals = [0.2, 0.8, 1];
 
 export default class Example extends React.Component {
-  state = { rotation: 0, showGradient: false };
+  state = {
+    rotation: -90,
+    rotation: 180,
+    // rotation: 105,
+    // rotation: 105 + 180,
+    // rotation: 315 + 10,
+    // rotation: 179,
+    // rotation: 49,
+    // rotation: 350,
+    showGradient: false
+  };
 
   render() {
     const { rotation } = this.state;
     let Gradient = LinearGradient;
-    Gradient = RadialGradient;
+    // Gradient = RadialGradient;
 
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -26,8 +36,6 @@ export default class Example extends React.Component {
             colors={colors}
             // intervals={intervals}
             rotation={rotation}
-            scaleX={1}
-            scaleY={2}
             style={{ justifyContent: 'center', alignItems: 'center' }}
           >
             <Text style={{ fontSize: 42, fontWeight: '900', color: '#fff9' }}>{rotation}°</Text>
@@ -42,12 +50,12 @@ export default class Example extends React.Component {
 
   componentDidMount() {
     setTimeout(() => this.setState({ showGradient: true }), 100);
-    // setInterval(() => {
-    //   let rotation = this.state.rotation + 45;
-    //   if (rotation > 360) {
-    //     rotation = -360;
-    //   }
-    //   this.setState({ rotation });
-    // }, 1500);
+    setInterval(() => {
+      let rotation = this.state.rotation + 15;
+      if (rotation > 360) {
+        rotation = -360;
+      }
+      this.setState({ rotation });
+    }, 1000);
   }
 }

@@ -9,7 +9,7 @@ const doubleHairlineWidth = hairlineWidth * 2;
 
 export default class RadialGradient extends React.Component {
   render() {
-    const { style, height, width, scaleX, scaleY, colors, rotation, children } = this.props;
+    const { style, height, width, colors, children } = this.props;
     let { intervals } = this.props;
 
     const diagonal = getHypotenuse(height, width);
@@ -18,17 +18,11 @@ export default class RadialGradient extends React.Component {
 
     return (
       <View style={[style, { height, width }]}>
-        <View
-          style={{
-            ...StyleSheet.absoluteFill,
-            overflow: 'hidden'
-          }}
-        >
+        <View style={styles.container}>
           <View
             style={{
               marginTop: height / 2,
-              alignItems: 'center',
-              transform: [{ scaleX }, { scaleY }, { rotate: `${rotation}deg` }]
+              alignItems: 'center'
             }}
           >
             {[...Array(gradientArrayLength)].slice(0, undefined).map((_, i) => {
@@ -62,14 +56,17 @@ RadialGradient.propTypes = {
   height: PropTypes.number.isRequired,
   width: PropTypes.number.isRequired,
   colors: PropTypes.arrayOf(PropTypes.string).isRequired,
-  intervals: PropTypes.arrayOf(PropTypes.number),
-  rotation: PropTypes.number // in degrees - NOT radians.
+  intervals: PropTypes.arrayOf(PropTypes.number)
 };
 
 RadialGradient.defaultProps = {
   height: 0,
-  width: 0,
-  rotation: 0,
-  scaleX: 1,
-  scaleY: 1
+  width: 0
 };
+
+const styles = StyleSheet.create({
+  container: {
+    ...StyleSheet.absoluteFill,
+    overflow: 'hidden'
+  }
+});
