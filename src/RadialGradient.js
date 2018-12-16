@@ -4,7 +4,8 @@ import { View, StyleSheet, Animated, Dimensions } from 'react-native';
 import { normalizeIntervals, getHypotenuse } from './utils';
 
 // const { height: SCREEN_HEIGHT, width: SCREEN_WIDTH } = Dimensions.get('window');
-const { hairlineWidth } = StyleSheet;
+// const { hairlineWidth } = StyleSheet;
+const hairlineWidth = 10;
 const doubleHairlineWidth = hairlineWidth * 2;
 
 export default class RadialGradient extends React.Component {
@@ -26,15 +27,35 @@ export default class RadialGradient extends React.Component {
             overflow: 'hidden'
           }}
         >
-          {Ring(diagonal, 'red')}
-          {/* <View
+          <View
             style={{
               justifyContent: 'center',
               alignItems: 'center',
               transform: [{ scaleX: 1 }, { scaleY: 1 }, { rotate: `${rotation}deg` }]
             }}
           >
-            {[...Array(gradientArrayLength)].map((_, i) => {
+            {[...Array(gradientArrayLength)].reduce((innerRing, _, i) => {
+              const size = doubleHairlineWidth * (i + 1);
+              return (
+                <Animated.View
+                  style={{
+                    height: size,
+                    width: size,
+                    borderRadius: size / 2,
+                    position: 'absolute',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    backgroundColor: new Animated.Value(i).interpolate({
+                      inputRange: normalIntervals,
+                      outputRange: colors
+                    })
+                  }}
+                >
+                  {innerRing}
+                </Animated.View>
+              );
+            }, null)}
+            {/* {[...Array(gradientArrayLength)].map((_, i) => {
               const size = doubleHairlineWidth * (i + 1);
               return (
                 <Animated.View
@@ -52,33 +73,14 @@ export default class RadialGradient extends React.Component {
                   }}
                 />
               );
-            })}
-          </View> */}
+            })} */}
+          </View>
         </View>
         {children}
       </View>
     );
   }
 }
-
-const Ring = (size, backgroundColor) => {
-  return (
-    size > 0 && (
-      <Animated.View
-        style={{
-          backgroundColor: 'red',
-          height: size,
-          width: size,
-          borderRadius: size / 2,
-          justifyContent: 'center',
-          alignItems: 'center'
-        }}
-      >
-        <Ring size={size - doubleHairlineWidth} backgroundColor={backgroundColor} />
-      </Animated.View>
-    )
-  );
-};
 
 RadialGradient.propTypes = {
   height: PropTypes.number.isRequired,

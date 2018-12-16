@@ -10,7 +10,7 @@ colors = ['#000', '#fff'];
 // const intervals = [0, 0.3, 1];
 
 export default class Example extends React.Component {
-  state = { rotation: -360, showGradient: false };
+  state = { rotation: 60, showGradient: false };
 
   render() {
     const { rotation } = this.state;
@@ -20,15 +20,15 @@ export default class Example extends React.Component {
         {this.state.showGradient ? (
           <>
             {/* <LinearGradient
-            height={height}
-            width={width}
-            rotation={rotation}
-            colors={colors}
-            // intervals={intervals}
-            style={{ justifyContent: 'center', alignItems: 'center' }}
-          >
-            <Text style={{ fontSize: 42, fontWeight: '900', color: '#fff9' }}>{rotation}°</Text>
-          </LinearGradient> */}
+              height={height}
+              width={width}
+              rotation={rotation}
+              colors={colors}
+              // intervals={intervals}
+              style={{ justifyContent: 'center', alignItems: 'center' }}
+            >
+              <Text style={{ fontSize: 42, fontWeight: '900', color: '#fff9' }}>{rotation}°</Text>
+            </LinearGradient> */}
             <RadialGradient
               height={height}
               // height={width}
