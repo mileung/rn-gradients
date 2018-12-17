@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Dimensions, Text } from 'react-native';
+import { View, StatusBar, Dimensions, Text } from 'react-native';
 import LinearGradient from './LinearGradient';
 import RadialGradient from './RadialGradient';
 
@@ -11,14 +11,7 @@ colors = ['#000', '#fff'];
 
 export default class Example extends React.Component {
   state = {
-    rotation: -90,
-    rotation: 180,
-    // rotation: 105,
-    // rotation: 105 + 180,
-    // rotation: 315 + 10,
-    // rotation: 179,
-    // rotation: 49,
-    // rotation: 350,
+    rotation: 0,
     showGradient: false
   };
 
@@ -29,6 +22,7 @@ export default class Example extends React.Component {
 
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <StatusBar hidden />
         {this.state.showGradient ? (
           <Gradient
             height={height}
@@ -50,12 +44,12 @@ export default class Example extends React.Component {
 
   componentDidMount() {
     setTimeout(() => this.setState({ showGradient: true }), 100);
-    setInterval(() => {
-      let rotation = this.state.rotation + 15;
-      if (rotation > 360) {
-        rotation = -360;
-      }
-      this.setState({ rotation });
-    }, 1000);
+    // setInterval(() => {
+    //   let rotation = this.state.rotation + 15;
+    //   if (rotation > 360) {
+    //     rotation = -360;
+    //   }
+    //   this.setState({ rotation });
+    // }, 1000);
   }
 }

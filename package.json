@@ -1,5 +1,5 @@
 {
-  "name": "RNGradients",
+  "name": "rn-gradients",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -18,5 +18,27 @@
   },
   "jest": {
     "preset": "react-native"
-  }
+  },
+  "description": "![](linear.gif)",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MiLeung/rn-gradients.git"
+  },
+  "keywords": [
+    "react",
+    "native",
+    "linear",
+    "radial",
+    "gradient",
+    "gradients",
+    "color",
+    "colors"
+  ],
+  "author": "MiLeung",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MiLeung/rn-gradients/issues"
+  },
+  "homepage": "https://github.com/MiLeung/rn-gradients#readme"
 }

@@ -1,39 +1,40 @@
 import React from 'react';
-import { FlatList, SafeAreaView, View, Dimensions, Text } from 'react-native';
+import { FlatList, StatusBar, SafeAreaView, View, Dimensions, Text } from 'react-native';
 import LinearGradient from './LinearGradient';
 import RadialGradient from './RadialGradient';
 
 const { height: SCREEN_HEIGHT, width: SCREEN_WIDTH } = Dimensions.get('window');
+const spacing = 10;
 
 export default class AnotherExample extends React.Component {
   render() {
     return (
-      // <FlatList
-      //   data={data}
-      //   keyExtractor={(_, i) => i}
-      //   renderItem={({ item: { colors, intervals, rotation }, i, index }) => {
-      //     return (
-      //       <LinearGradient
-      //         key={index}
-      //         colors={colors}
-      //         intervals={intervals}
-      //         rotation={rotation}
-      //         width={SCREEN_WIDTH / 1.1}
-      //         height={SCREEN_WIDTH / 1.2}
-      //         style={{ borderRadius: 10 }}
-      //       />
-      //     );
-      //   }}
-      // />
-      <LinearGradient
-        colors={['#FFE53B', '#FF2525']}
-        intervals={[0, 0.75]}
-        rotation={147}
-        rotation={135}
-        width={SCREEN_WIDTH / 1.1}
-        height={SCREEN_WIDTH / 1.2}
-        style={{ borderRadius: 10 }}
-      />
+      <>
+        <StatusBar hidden />
+        <FlatList
+          data={data}
+          keyExtractor={(_, i) => i}
+          ListFooterComponent={<View style={{ height: spacing }} />}
+          renderItem={({ item: { colors, intervals, rotation }, i, index }) => {
+            return (
+              <LinearGradient
+                key={index}
+                colors={colors}
+                intervals={intervals}
+                rotation={rotation + 180}
+                width={SCREEN_WIDTH - 2 * spacing}
+                height={SCREEN_WIDTH / 1.2}
+                style={{
+                  marginTop: spacing,
+                  borderRadius: spacing,
+                  overflow: 'hidden',
+                  alignSelf: 'center'
+                }}
+              />
+            );
+          }}
+        />
+      </>
     );
   }
 }
