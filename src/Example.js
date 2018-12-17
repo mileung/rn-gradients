@@ -20,6 +20,18 @@ export default class Example extends React.Component {
     let Gradient = LinearGradient;
     // Gradient = RadialGradient;
 
+    // return (
+    //   <Gradient
+    //     height={height}
+    //     width={width}
+    //     colors={colors}
+    //     rotation={rotation}
+    //     style={{ justifyContent: 'center', alignItems: 'center' }}
+    //   >
+    //     <Text style={{ fontSize: 42, fontWeight: '900', color: '#fffe' }}>Hello, World!</Text>
+    //   </Gradient>
+    // );
+
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <StatusBar hidden />

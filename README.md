@@ -4,9 +4,13 @@ A 100% JS solution to adding linear and radial gradients to your React Native pr
 
 _Note: This project was an experiment to see if color gradients were possible in React Native with just pure JS. This package IS NOT performant and I would only recommend using it if you can't get the other (native) gradient packages to work or if you are only rendering 1 - 2 gradients at a time._
 
-![](linear.gif | width=80)
+`LinearGradient`
 
-![](radial.gif | width=80)
+![](https://media.giphy.com/media/PO61qxMbmNBroxSRf4/giphy.gif)
+
+`RadialGradient`
+
+![](https://media.giphy.com/media/2yxJoTm9ZaYxbJvdNA/giphy.gif)
 
 ### Install
 
@@ -31,7 +35,6 @@ _Note: This project was an experiment to see if color gradients were possible in
   <Text style={{ fontSize: 42, fontWeight: '900', color: '#fff9' }}>Hello World</Text>
 </LinearGradient>
 ```
-
 
 ### Props
 
