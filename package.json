@@ -13,7 +13,7 @@
   "jest": {
     "preset": "react-native"
   },
-  "description": "![](linear.gif)",
+  "description": "A 100% JS solution to adding linear and radial gradients to your React Native projects.",
   "main": "index.js",
   "repository": {
     "type": "git",
