@@ -6,11 +6,15 @@ _Note: This project was an experiment to see if color gradients were possible in
 
 `LinearGradient`
 
-![](https://media.giphy.com/media/PO61qxMbmNBroxSRf4/giphy.gif)
+![](https://i.giphy.com/media/PO61qxMbmNBroxSRf4/giphy.gif)
 
 `RadialGradient`
 
-![](https://media.giphy.com/media/2yxJoTm9ZaYxbJvdNA/giphy.gif)
+![](https://i.giphy.com/media/2yxJoTm9ZaYxbJvdNA/giphy.gif)
+
+children are supported
+
+<img src="https://i.imgur.com/PsOSGhw.png" width="250">
 
 ### Install
 
@@ -46,12 +50,6 @@ LinearGradient.propTypes = {
   intervals: PropTypes.arrayOf(PropTypes.number),
   rotation: PropTypes.number // in degrees - NOT radians.
 };
-
-LinearGradient.defaultProps = {
-  height: 0,
-  width: 0,
-  rotation: 0
-};
 ```
 
 ```javascript
@@ -60,10 +58,5 @@ RadialGradient.propTypes = {
   width: PropTypes.number.isRequired,
   colors: PropTypes.arrayOf(PropTypes.string).isRequired,
   intervals: PropTypes.arrayOf(PropTypes.number)
-};
-
-RadialGradient.defaultProps = {
-  height: 0,
-  width: 0
 };
 ```

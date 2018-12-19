@@ -81,12 +81,6 @@ LinearGradient.propTypes = {
   rotation: PropTypes.number // in degrees - NOT radians.
 };
 
-LinearGradient.defaultProps = {
-  height: 0,
-  width: 0,
-  rotation: 0
-};
-
 const styles = StyleSheet.create({
   container: {
     ...StyleSheet.absoluteFill,

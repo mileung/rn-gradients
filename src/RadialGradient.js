@@ -59,11 +59,6 @@ RadialGradient.propTypes = {
   intervals: PropTypes.arrayOf(PropTypes.number)
 };
 
-RadialGradient.defaultProps = {
-  height: 0,
-  width: 0
-};
-
 const styles = StyleSheet.create({
   container: {
     ...StyleSheet.absoluteFill,
