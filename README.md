@@ -6,11 +6,11 @@ _Note: This project was an experiment to see if color gradients were possible in
 
 `LinearGradient`
 
-![](https://i.giphy.com/media/PO61qxMbmNBroxSRf4/giphy.gif)
+![](linear.gif)
 
 `RadialGradient`
 
-![](https://i.giphy.com/media/2yxJoTm9ZaYxbJvdNA/giphy.gif)
+![](radial.gif)
 
 children are supported
 
